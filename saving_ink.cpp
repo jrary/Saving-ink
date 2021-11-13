@@ -8,7 +8,8 @@ struct cost {
 };
 /*
 * Description: Bubble sort algorithm - To sort them in the order of less cost.
-* 
+* Input: Struct array to sort, The length of struct 'distance'
+* Output: void
 */
 void bubble_sort(struct cost *distance, int k) {
 	struct cost temp;
@@ -22,6 +23,11 @@ void bubble_sort(struct cost *distance, int k) {
 		}
 	}
 }
+/*
+* Description: Kruscal algorithm
+* Input: 
+* Output:
+*/
 float kruskal(int n, float** arr) {
 	int distance_n, k = 0;
 	distance_n = n * (n - 1) / 2;
