@@ -11,7 +11,7 @@ struct cost {
 * Input: Struct array to sort, The length of struct 'distance'
 * Output: void
 */
-void bubble_sort(struct cost *distance, int k) {
+void bubble_sort(struct cost* distance, int k) {
 	struct cost temp;
 	for (int i = 0; i < k; i++) {
 		for (int j = 0; j < k - 1; j++) {
@@ -25,13 +25,13 @@ void bubble_sort(struct cost *distance, int k) {
 }
 /*
 * Description: Kruscal algorithm
-* Input: 
-* Output:
+* Input: The number of coordinates, array of x-coodinate and y-coordinate in unconnected graph
+* Output: Minimum weight
 */
 float kruskal(int n, float** arr) {
-	int distance_n, k = 0;
-	distance_n = n * (n - 1) / 2;
-	struct cost* distance = (struct cost*)malloc(sizeof(struct cost) * distance_n);
+	int distance_n, k = 0; //index of the distance
+	distance_n = n * (n - 1) / 2; //Store the expected number of distances
+	struct cost* distance = (struct cost*)malloc(sizeof(struct cost) * distance_n); //Array to store the distance
 
 	for (int i = 0; i < n; i++) {
 		for (int j = i + 1; j < n; j++) {
@@ -44,30 +44,30 @@ float kruskal(int n, float** arr) {
 
 	bubble_sort(distance, k);
 
-	int* set = (int*)malloc(sizeof(int) * n);
+	int* set = (int*)malloc(sizeof(int) * n); //To store the set
 	for (int i = 0; i < n; i++) {
 		set[i] = n;
 	}
 
 	float cost = 0.0;
-	int set_num = 0;
+	int set_num = 0; //index of the set
 	for (int i = 0; i < k; i++) {
 		int n1 = distance[i].m;
 		int n2 = distance[i].n;
-		if (set[n1] == n && set[n2] == n) {
+		if (set[n1] == n && set[n2] == n) { //When both node are not connected 
 			set[n1] = set_num;
 			set[n2] = set_num;
 			set_num++;
 		}
-		else if (set[n1] == n || set[n2] == n) {
-			if (set[n1] == n) {
+		else if (set[n1] == n || set[n2] == n) { //When only one node is connected
+			if (set[n1] == n) { //n1 node is not connected
 				set[n1] = set[n2];
 			}
-			else {
+			else { //n2 node is not connected
 				set[n2] = set[n1];
 			}
 		}
-		else if (set[n1] != set[n2]) {
+		else if (set[n1] != set[n2]) { //Both nodes are connected, but when the set is different
 			int n2_temp;
 			for (int j = 0; j < k; j++) {
 				if (set[j] == n2_temp) {
@@ -83,9 +83,9 @@ float kruskal(int n, float** arr) {
 	return cost;
 }
 int main() {
-	int n;
-	float result;
-	float** arr;
+	int n; //Number of edges
+	float result; //Final result (Minimum cost)
+	float** arr; //To store the edge coordinates
 	scanf("%d", &n);
 	arr = (float**)malloc(sizeof(float*) * n);
 
